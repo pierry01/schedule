@@ -12,40 +12,42 @@ module Views
             end
 
             CardContent do
-              6.times do |index|
-                div(class: "overflow-auto flex flex-row items-center justify-between gap-3") do
-                  Text(size: "2") { (Date.tomorrow + index).strftime("%d/%m") }
+              div(class: "overflow-auto flex flex-row items-center justify-between gap-2") do
+                form_with(id: "VIEWS__HOME__INDEX__FORM", url: "#", class: "w-full flex flex-col gap-2") do
+                  FormField do
+                    6.times do |index|
+                      div(class: "space-y-0 flex flex-row flex-1 items-center justify-between gap-2") do
+                        Text(size: "2") { (Date.tomorrow + index).strftime("%d/%m") }
 
-                  form_with(id: "VIEWS__HOME__INDEX__FORM", url: "#", class: "flex flex-col gap-3") do
-                    FormField(class: "space-y-0 flex flex-row flex-1 items-center justify-between gap-3") do
-                      %w[ 06:00 07:00 12:00 19:00 20:00 21:00 ].each_with_index do |datetime, datetime_index|
-                        div(class: "relative h-9 my-0.5 flex flex-row items-center gap-3") do
-                          RadioButton(
-                            required: true,
-                            name: "datetime",
-                            id: "datetime_#{index}_#{datetime_index}",
-                            data: { value_missing: "Campo obrigatório" },
-                            class: [
-                              "w-14 h-8 flex-none border-zinc-300 rounded cursor-pointer peer",
-                              "focus:text-primary focus:ring-0",
-                              "hover:bg-primary hover:text-white",
-                              "checked:text-white checked:bg-primary"
-                            ]
-                          )
+                        %w[ 06:00 07:00 12:00 19:00 20:00 21:00 ].each_with_index do |datetime, datetime_index|
+                          div(class: "relative h-9 my-0.5 flex flex-row items-center gap-2") do
+                            RadioButton(
+                              required: true,
+                              name: "datetime",
+                              id: "datetime_#{index}_#{datetime_index}",
+                              data: { value_missing: "Campo obrigatório" },
+                              class: [
+                                "w-14 h-8 flex-none border-zinc-300 rounded cursor-pointer peer",
+                                "focus:text-primary focus:ring-0",
+                                "hover:bg-primary hover:text-white",
+                                "checked:text-white checked:bg-primary"
+                              ]
+                            )
 
-                          FormFieldLabel(
-                            for: "datetime_#{index}_#{datetime_index}",
-                            class: [
-                              "absolute left-2 cursor-pointer",
-                              "peer-hover:bg-primary peer-hover:text-white",
-                              "peer-checked:text-white peer-checked:bg-primary"
-                            ]
-                          ) { datetime }
+                            FormFieldLabel(
+                              for: "datetime_#{index}_#{datetime_index}",
+                              class: [
+                                "absolute left-2 cursor-pointer",
+                                "peer-hover:bg-primary peer-hover:text-white",
+                                "peer-checked:text-white peer-checked:bg-primary"
+                              ]
+                            ) { datetime }
+                          end
                         end
                       end
-
-                      FormFieldError()
                     end
+
+                    FormFieldError()
                   end
                 end
               end
