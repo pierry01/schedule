@@ -5,6 +5,7 @@ class Components::Base < Phlex::HTML
   include RubyUI
 
   include Phlex::Rails::Helpers::Routes
+  include Phlex::Rails::Helpers::FormWith
 
   if Rails.env.development?
     def before_template
