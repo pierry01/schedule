@@ -9,8 +9,6 @@ gem "turbo-rails", "2.0.11"
 gem "stimulus-rails", "1.3.4"
 gem "jbuilder", "2.13.0"
 gem "bootsnap", "1.18.4", require: false
-gem "ruby_ui", "1.0.0.pre.alpha.4"
-gem "tailwindcss-rails", "3.0.0"
 
 group :development, :test do
   gem "debug", "1.9.2", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -28,7 +26,3 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
-
-gem "phlex-rails", "~> 1.2.1"
-
-gem "tailwind_merge", "~> 0.13.3"
