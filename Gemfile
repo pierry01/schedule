@@ -10,6 +10,9 @@ gem "stimulus-rails", "1.3.4"
 gem "jbuilder", "2.13.0"
 gem "bootsnap", "1.18.4", require: false
 gem "tailwindcss-rails", "3.0.0"
+gem "ruby_ui", "1.0.0.beta1", require: false
+gem "phlex-rails", "2.0.0.rc1", github: "phlex-ruby/phlex-rails"
+gem "tailwind_merge", "0.13.3"
 
 group :development, :test do
   gem "debug", "1.9.2", platforms: %i[ mri windows ], require: "debug/prelude"
