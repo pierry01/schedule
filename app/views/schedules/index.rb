@@ -3,6 +3,12 @@
 module Views
   module Schedules
     class Index < Views::Base
+      def initialize(schedules:)
+        super()
+
+        @schedules = schedules
+      end
+
       def view_template
         div(class: "w-screen h-screen p-2 flex flex-col items-center justify-center") do
           Card(class: "w-full max-w-lg") do
@@ -22,29 +28,38 @@ module Views
                         Text(size: "2") { date.strftime("%d/%m") }
 
                         %w[ 06:00 07:00 12:00 19:00 20:00 21:00 ].each_with_index do |hour, hour_index|
-                          div(class: "relative h-9 my-0.5 flex flex-row items-center gap-2") do
-                            RadioButton(
-                              required: true,
-                              value: "#{date}T#{hour}",
-                              name: "schedule[scheduled_at]",
-                              id: "datetime_#{index}_#{hour_index}",
-                              data: { value_missing: "Campo obrigatório" },
-                              class: [
-                                "w-14 h-8 flex-none border-zinc-300 rounded cursor-pointer peer",
-                                "focus:text-primary focus:ring-0",
-                                "hover:bg-primary hover:text-white",
-                                "checked:text-white checked:bg-primary"
-                              ]
-                            )
+                          scheduled_at = "#{date} #{hour}"
 
-                            FormFieldLabel(
-                              for: "datetime_#{index}_#{hour_index}",
-                              class: [
-                                "absolute left-2 cursor-pointer",
-                                "peer-hover:bg-primary peer-hover:text-white",
-                                "peer-checked:text-white peer-checked:bg-primary"
-                              ]
-                            ) { hour }
+                          if @schedules.exists?(scheduled_at:)
+                            div(class: "relative h-9 my-0.5 flex flex-row items-center gap-2") do
+                              RadioButton(disabled: true, class: "cursor-not-allowed w-14 h-8 flex-none border-zinc-300 rounded")
+                              FormFieldLabel(class: "cursor-not-allowed absolute left-2 text-zinc-300") { hour }
+                            end
+                          else
+                            div(class: "relative h-9 my-0.5 flex flex-row items-center gap-2") do
+                              RadioButton(
+                                required: true,
+                                value: scheduled_at,
+                                name: "schedule[scheduled_at]",
+                                id: "datetime_#{index}_#{hour_index}",
+                                data: { value_missing: "Campo obrigatório" },
+                                class: [
+                                  "w-14 h-8 flex-none border-zinc-300 rounded cursor-pointer peer",
+                                  "focus:text-primary focus:ring-0",
+                                  "hover:bg-primary hover:text-white",
+                                  "checked:text-white checked:bg-primary"
+                                ]
+                              )
+
+                              FormFieldLabel(
+                                for: "datetime_#{index}_#{hour_index}",
+                                class: [
+                                  "absolute left-2 cursor-pointer",
+                                  "peer-hover:bg-primary peer-hover:text-white",
+                                  "peer-checked:text-white peer-checked:bg-primary"
+                                ]
+                              ) { hour }
+                            end
                           end
                         end
                       end

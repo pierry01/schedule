@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class SchedulesController < ApplicationController
-  def index = render(Views::Schedules::Index.new)
+  def index
+    render(Views::Schedules::Index.new(schedules: Schedule.all))
+  end
 
   def create
     Schedule.create!(schedule_params)
