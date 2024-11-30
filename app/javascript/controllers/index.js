@@ -3,7 +3,3 @@ import { application } from "controllers/application"
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 
 eagerLoadControllersFrom("controllers", application)
-
-import RubyUi__AccordionController from "./ruby_ui/accordion_controller";
-
-application.register("ruby-ui--accordion", RubyUi__AccordionController);
