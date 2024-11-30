@@ -4,7 +4,7 @@ module Views
   module Home
     class Index < Views::Base
       def view_template
-        div(class: "w-screen h-screen p-4 flex flex-col items-center justify-center") do
+        div(class: "w-screen h-screen p-2 flex flex-col items-center justify-center") do
           Card(class: "w-full max-w-lg") do
             CardHeader do
               CardTitle { "Selecione a melhor data" }
