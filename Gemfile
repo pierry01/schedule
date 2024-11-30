@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails", "7.2.2"
+gem "rails", "8.0.0"
 gem "sprockets-rails", "3.5.2"
 gem "sqlite3", "2.3.1"
 gem "puma", "6.5.0"
