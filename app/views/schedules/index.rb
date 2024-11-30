@@ -6,7 +6,7 @@ module Views
       def initialize(schedules:)
         super()
 
-        @schedules = schedules
+        @scheduled_ats = schedules.pluck(:scheduled_at)
       end
 
       def view_template
@@ -28,9 +28,9 @@ module Views
                         Text(size: "2") { date.strftime("%d/%m") }
 
                         %w[ 06:00 07:00 12:00 19:00 20:00 21:00 ].each_with_index do |hour, hour_index|
-                          scheduled_at = "#{date} #{hour}"
+                          scheduled_at = "#{date} #{hour}:00 UTC"
 
-                          if @schedules.exists?(scheduled_at:)
+                          if scheduled_at.in?(@scheduled_ats)
                             div(class: "relative h-9 my-0.5 flex flex-row items-center gap-2") do
                               RadioButton(disabled: true, class: "cursor-not-allowed w-14 h-8 flex-none border-zinc-300 rounded")
                               FormFieldLabel(class: "cursor-not-allowed absolute left-2 text-zinc-300") { hour }
