@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Views
-  module Home
+  module Schedules
     class Index < Views::Base
       def view_template
         div(class: "w-screen h-screen p-2 flex flex-col items-center justify-center") do
@@ -13,18 +13,21 @@ module Views
 
             CardContent do
               div(class: "overflow-auto flex flex-row items-center justify-between gap-2") do
-                form_with(id: "VIEWS__HOME__INDEX__FORM", url: "#", class: "w-full flex flex-col gap-2") do
+                form_with(id: "VIEWS__SCHEDULES__INDEX__FORM", url: schedules_path, class: "w-full flex flex-col gap-2") do
                   FormField do
                     6.times do |index|
-                      div(class: "space-y-0 flex flex-row flex-1 items-center justify-between gap-2") do
-                        Text(size: "2") { (Date.tomorrow + index).strftime("%d/%m") }
+                      date = Date.tomorrow + index
 
-                        %w[ 06:00 07:00 12:00 19:00 20:00 21:00 ].each_with_index do |datetime, datetime_index|
+                      div(class: "space-y-0 flex flex-row flex-1 items-center justify-between gap-2") do
+                        Text(size: "2") { date.strftime("%d/%m") }
+
+                        %w[ 06:00 07:00 12:00 19:00 20:00 21:00 ].each_with_index do |hour, hour_index|
                           div(class: "relative h-9 my-0.5 flex flex-row items-center gap-2") do
                             RadioButton(
                               required: true,
-                              name: "datetime",
-                              id: "datetime_#{index}_#{datetime_index}",
+                              value: "#{date}T#{hour}",
+                              name: "schedule[scheduled_at]",
+                              id: "datetime_#{index}_#{hour_index}",
                               data: { value_missing: "Campo obrigatório" },
                               class: [
                                 "w-14 h-8 flex-none border-zinc-300 rounded cursor-pointer peer",
@@ -35,13 +38,13 @@ module Views
                             )
 
                             FormFieldLabel(
-                              for: "datetime_#{index}_#{datetime_index}",
+                              for: "datetime_#{index}_#{hour_index}",
                               class: [
                                 "absolute left-2 cursor-pointer",
                                 "peer-hover:bg-primary peer-hover:text-white",
                                 "peer-checked:text-white peer-checked:bg-primary"
                               ]
-                            ) { datetime }
+                            ) { hour }
                           end
                         end
                       end
@@ -54,7 +57,7 @@ module Views
             end
 
             CardFooter do
-              Button(type: "submit", class: "w-full", form: "VIEWS__HOME__INDEX__FORM") do
+              Button(type: "submit", class: "w-full", form: "VIEWS__SCHEDULES__INDEX__FORM") do
                 "Realize o pagamento para agendar a reunião"
               end
             end
