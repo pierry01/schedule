@@ -2,6 +2,7 @@
 
 class Components::Base < Phlex::HTML
   include Components
+  include RubyUI
 
   include Phlex::Rails::Helpers::Routes
 
