@@ -12,7 +12,7 @@ gem "bootsnap", "1.18.4", require: false
 gem "tailwindcss-rails", "3.0.0"
 gem "ruby_ui", "1.0.0.beta1", require: false
 gem "phlex-rails", "2.0.0.rc1", github: "phlex-ruby/phlex-rails"
-gem "tailwind_merge", "0.13.3"
+gem "tailwind_merge", "0.14.0"
 
 group :development, :test do
   gem "debug", "1.9.2", platforms: %i[ mri windows ], require: "debug/prelude"
