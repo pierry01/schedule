@@ -16,7 +16,7 @@ gem "tailwind_merge", "0.13.3"
 
 group :development, :test do
   gem "debug", "1.9.2", platforms: %i[ mri windows ], require: "debug/prelude"
-  gem "brakeman", "6.2.2", require: false
+  gem "brakeman", "7.0.0", require: false
   gem "rubocop-rails-omakase", "1.0.0", require: false
 end
 
