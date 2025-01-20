@@ -26,7 +26,7 @@ end
 
 group :test do
   gem "capybara", "3.40.0"
-  gem "selenium-webdriver", "4.27.0"
+  gem "selenium-webdriver", "4.28.0"
 end
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
